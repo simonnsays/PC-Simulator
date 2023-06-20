@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>PROTOTYPE</title>
+    <style>
+
+    </style>
+  </head>
+  <body id="index">
+    
+    <div id="canvas-container" >
+      <div id="btnContainer">
+        <button id="turnLeft" class="button gameBtn">↻</button>
+        <button id="turnRight" class="button gameBtn">↺</button>
+
+        <!-- SHOP -->
+        <button id="openShop" class="button gameBtn">SHOP</button>
+        <dialog id="shop" class="modal"> 
+          <div class="search-bar"> 
+            <!---- SEARCH BAR ---->
+          </div>
+          <div class="modal-container">  
+            <div class="side">
+              <h3>SHOP</h3>
+              <button id="closeShop" class="button gameBtn">CLOSE</button>
+            </div>
+            <div id="shopContents" class="contents">
+              <!-- SHOP CONTENTS -->
+            </div>
+          </div>
+        </dialog>
+
+        <!-- INVENTORY -->
+        <button id="openInv" class="button gameBtn">INVENTORY</button>
+        <dialog id="inv" class="modal"> 
+          <div class="search-bar"> 
+            <!---- SEARCH BAR ---->
+          </div>
+          <div class="modal-container">  
+            <div class="side">
+              <h3>INVENTORY</h3>
+              <button id="closeInv" class="button gameBtn">CLOSE</button>
+            </div>
+            <div id="invContents" class="contents">
+              <!-- INV CONTENTS -->
+            </div>
+          </div> 
+        </dialog>
+        
+      </div>
+
+      <!-- CANVAS -->
+      <canvas></canvas>
+      
+    </div>
+    
+    <script src="./scripts/component.js"></script>
+    <script src="./scripts/ui.js"></script>
+    <script src="./scripts/main.js"></script>
+  </body>
