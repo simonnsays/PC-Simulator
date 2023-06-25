@@ -8,7 +8,11 @@ components.push(new Component({
     states: {
         default: {imageSrc: '../assets/PC Case/Nanoxia/Side.png'},
         front: {imageSrc: '../assets/PC Case/Nanoxia/Front.png'}
-    }
+    },
+    slots: [
+        {name: 'MoBo', x: 25, y: 37, w: 257, h: 295},
+        {name: 'psu', x: 18, y: 337, w: 130, h: 70}
+    ]
 }))
 
 components.push(new Component({
@@ -78,6 +82,3 @@ function transferToCanvas(name) {
 
 game.start()
 fillShop(components)
-
-
-

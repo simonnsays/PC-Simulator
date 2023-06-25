@@ -38,7 +38,7 @@ class UI {
                     break
             }
         })
-        this.pcCaseToAdd = []
+        this.pcToBuild = undefined
         this.componentsToAdd = []      
      
         this.selectedComponent = undefined
@@ -54,8 +54,6 @@ class UI {
         this.selectedComponent = this.getPiece(mousePosition)
 
         if (this.selectedComponent != undefined){
-            console.log(mousePosition)
-            console.log(this.selectedComponent)
             this.origin = {
                 x: this.selectedComponent.boundingBox.x,
                 y: this.selectedComponent.boundingBox.y
@@ -127,8 +125,15 @@ class UI {
     }
 
     addToPcCaseArea(src) {
-        if(this.pcCaseToAdd.length > 0) this.pcCaseToAdd.pop()
-        this.pcCaseToAdd.unshift(src)
+        this.pcToBuild = src
+
+        //create Bounding Box
+        this.pcToBuild.box = {
+            x: this.pcCaseArea.x + 100,
+            y: this.pcCaseArea.y + 100,
+            w: this.pcCaseArea.w -200,
+            h: this.pcCaseArea.h -208
+        }
     }
 
     animate() {
@@ -140,22 +145,25 @@ class UI {
         this.ctx.fillStyle = 'rgb(0,178,178,0.7)'
         this.ctx.fillRect(10,10,700,650)
 
-        //COMPONENT 1 AREA
-        this.ctx.fillRect(720, 10, 530, 210)
-
-        //COMPONENT 2 AREA
-        this.ctx.fillRect(720, 230, 530, 210)
-
-        //COMPONENT 3 AREA
-        this.ctx.fillRect(720, 450, 530, 210)
-
-        this.pcCaseToAdd.forEach((image) => {
-            this.ctx.drawImage(image.states.default.image, 
-                this.pcCaseArea.x + 50, 
-                this.pcCaseArea.y + 50,
-                this.pcCaseArea.w -100,  
-                this.pcCaseArea.h -100 )
+        //COMPONENT AREAS
+        this.componentAreas.forEach((area) => {       
+            this.ctx.fillRect(area.x, area.y, area.w, area.h)
         })
+
+        //DRAW PC
+        if (this.pcToBuild != undefined){
+            let PC = this.pcToBuild
+            this.ctx.drawImage(PC.states.default.image, 
+                PC.box.x, PC.box.y, PC.box.w, PC.box.h)
+                
+            PC.slots.forEach((slot) => {
+                this.ctx.fillStyle = 'rgb(0,200,0,0.2)'
+                this.ctx.fillRect(PC.box.x + slot.x, 
+                    PC.box.y + slot.y, slot.w, slot.h)
+            })
+        }
+
+        //DRAW COMPONENTS
         this.componentsToAdd.forEach((image, index) => {
             const x = this.componentsToAdd[index].boundingBox.x
             const y = this.componentsToAdd[index].boundingBox.y
