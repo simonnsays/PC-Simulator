@@ -10,8 +10,8 @@ components.push(new Component({
         front: {imageSrc: '../assets/PC Case/Nanoxia/Front.png'}
     },
     slots: [
-        {name: 'MoBo', x: 25, y: 37, w: 257, h: 295},
-        {name: 'psu', x: 18, y: 337, w: 130, h: 70}
+        {name: 'MoBo', x: 45, y: 52, w: 187, h: 272},
+        {name: 'psu', x: 18, y: 337, w: 129, h: 70}
     ]
 }))
 
