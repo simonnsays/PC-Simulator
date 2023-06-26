@@ -89,11 +89,15 @@ class UI {
         }
 
         this.availableSlots.forEach((slot) => {
-            if (this.partsAreClose(this.selectedComponent, slot)) this.snap(this.selectedComponent, slot)
+            if (this.partsAreClose(this.selectedComponent, slot)) {
+                this.snap(this.selectedComponent, slot)
+            } else {
+                this.selectedComponent.box.x = this.origin.x
+                this.selectedComponent.box.y = this.origin.y
+            }
         })
 
-        this.selectedComponent.box.x = this.origin.x
-        this.selectedComponent.box.y = this.origin.y
+        
         
         this.selectedComponent = undefined
         this.origin = undefined
@@ -145,6 +149,8 @@ class UI {
     snap(itemDragged, toSnap){
         itemDragged.box.x = toSnap.x
         itemDragged.box.y = toSnap.y
+        itemDragged.box.w = toSnap.w
+        itemDragged.box.h = toSnap.h
     }
 
     start() {
@@ -211,22 +217,11 @@ class UI {
             this.ctx.drawImage(component.states.default.image, component.box.x, component.box.y, component.box.w, component.box.h)
 
             //DRAW SLOTS
-            component.slots.forEach((slot) => {
-                this.ctx.fillStyle = 'rgb(0,200,0,0.2)'
-                this.ctx.fillRect(slot.x, slot.y, slot.w, slot.h)
-            })
+            // component.slots.forEach((slot) => {
+            //     this.ctx.fillStyle = 'rgb(0,200,0,0.2)'
+            //     this.ctx.fillRect(slot.x, slot.y, slot.w, slot.h)
+            // })
         })
-        // if (this.pcToBuild != undefined){
-        //     let PC = this.pcToBuild
-        //     this.ctx.drawImage(PC.states.default.image, 
-        //         PC.box.x, PC.box.y, PC.box.w, PC.box.h)
-            
-        //     //DRAW SLOTS
-        //     PC.slots.forEach((slot) => {
-        //         this.ctx.fillStyle = 'rgb(0,200,0,0.2)'
-        //         this.ctx.fillRect(slot.x, slot.y, slot.w, slot.h)
-        //     })
-        // }
 
         //DRAW COMPONENTS
         this.componentsToAdd.forEach((image, index) => {
