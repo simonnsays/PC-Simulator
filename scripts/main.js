@@ -1,28 +1,4 @@
 const game = new UI
-let components = []
-
-components.push(new Component({
-    type: 'pcCase',
-    name: 'Nanoxia Deep Silence 3',
-    size: 'mid-tower',
-    states: {
-        default: {imageSrc: '../assets/PC Case/Nanoxia/Side.png'},
-        front: {imageSrc: '../assets/PC Case/Nanoxia/Front.png'}
-    },
-    slots: [
-        {name: 'MoBo', x: 37, y: 49, w: 197, h: 275},
-        {name: 'psu', x: 18, y: 337, w: 129, h: 70}
-    ]
-}))
-
-components.push(new Component({
-    type: 'MoBo',
-    name: 'ASUS P8P67',
-    size: 'ATX',
-    states: {
-        default: {imageSrc: '../assets/MotherBoard/ASUS/P8P67/Default.png'}
-    }
-}))
 
 ///////////// FILL SHOP Function
 function fillShop(items) {

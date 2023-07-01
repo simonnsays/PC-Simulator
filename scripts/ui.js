@@ -43,16 +43,19 @@ class UI {
      
         this.selectedComponent = undefined
         this.availableSlots = []
+        this.drawHighlights = false
         this.origin = undefined
         this.canvas.addEventListener('mousedown', (e) => this.handleMouseDown(e))
         this.canvas.addEventListener('mousemove', (e) => this.handleMouseMove(e))
         this.canvas.addEventListener('mouseup', () => this.handleMouseUp())
     }   
 
+    // MOUSE DOWN EVENT
     handleMouseDown(e) {
         //get mouse position and boundingBox of the component
         const mousePosition = this.getMousePosition(e)
         this.selectedComponent = this.getPiece(mousePosition)
+        console.log(this.selectedComponent)
 
         if (this.selectedComponent != undefined){
             //declare origin for reference
@@ -60,6 +63,7 @@ class UI {
                 x: this.selectedComponent.box.x,
                 y: this.selectedComponent.box.y
             }
+            console.log(this.origin)
 
             //image to cursor offset
             this.selectedComponent.offset = {
@@ -70,35 +74,57 @@ class UI {
             //get available slots for the selected component
             if (this.pcToBuild.length != 0){
                 this.availableSlots = (this.getSlots(this.selectedComponent, this.pcToBuild))
-                console.log(this.availableSlots)
             }
-          }
+        }
     }
 
+    //MOUSE MOVE EVENT
     handleMouseMove(e) {
         const mousePosition = this.getMousePosition(e)
         if (this.selectedComponent !== undefined) {
             this.selectedComponent.box.x = mousePosition.x - this.selectedComponent.offset.x
             this.selectedComponent.box.y = mousePosition.y - this.selectedComponent.offset.y
+
+            this.availableSlots.forEach((slot) => {
+                if (this.partsAreClose(this.selectedComponent, slot)) {
+                    this.drawHighlights = true
+                }
+            })
         }
+
+        
     }
 
+    //MOUSE UP EVENT
     handleMouseUp() {
         if(this.selectedComponent == undefined){
             return
         }
+        if(this.pcToBuild.length == 0) {
+            this.selectedComponent.box.x = this.origin.x
+            this.selectedComponent.box.y = this.origin.y
+        }
 
         this.availableSlots.forEach((slot) => {
             if (this.partsAreClose(this.selectedComponent, slot)) {
+                
                 this.snap(this.selectedComponent, slot)
+                this.pcToBuild.push(this.selectedComponent)
+                
+                this.componentsToAdd.forEach((component, index) => {
+                    if (this.selectedComponent == component) {
+                        console.log('hit')
+                        this.componentsToAdd.splice(index, 1)
+                        console.log(this.componentsToAdd)
+                    }
+                })
             } else {
                 this.selectedComponent.box.x = this.origin.x
                 this.selectedComponent.box.y = this.origin.y
             }
         })
-
         
-        
+        this.drawHighlights = false
         this.selectedComponent = undefined
         this.origin = undefined
     }
@@ -114,7 +140,7 @@ class UI {
     getPiece(mouse) {
         for (let i = this.componentsToAdd.length - 1; i >= 0; i--) {
             if (mouse.x >= this.componentsToAdd[i].box.x &&
-                mouse.y <= this.componentsToAdd[i].box.x + this.componentsToAdd[i].box.w && 
+                mouse.x <= this.componentsToAdd[i].box.x + this.componentsToAdd[i].box.w && 
                 mouse.y >= this.componentsToAdd[i].box.y &&
                 mouse.y <= this.componentsToAdd[i].box.y + this.componentsToAdd[i].box.h) {
                     return this.componentsToAdd[i]
@@ -135,7 +161,7 @@ class UI {
     }
 
     partsAreClose(component, slot) {
-        return this.distance({x: component.box.x, y:component.box.y}, {x: slot.x, y: slot.y}) < slot.w / 4
+        return this.distance({x: component.box.x, y:component.box.y}, {x: slot.x, y: slot.y}) < slot.w / 3
     }
 
     distance(point1, point2) {
@@ -162,7 +188,6 @@ class UI {
         let component = Object.assign({}, src)
         this.componentsToAdd.unshift(component)
         this.createBoundingBox(this.componentsToAdd)
-        console.log(this.componentsToAdd)
     }
 
     createBoundingBox(components) {
@@ -203,6 +228,7 @@ class UI {
         this.ctx.fillStyle = 'teal'
         this.ctx.fillRect(0,0,this.canvas.width,this.canvas.height)
 
+        
         //PC CASE AREA
         this.ctx.fillStyle = 'rgb(0,178,178,0.7)'
         this.ctx.fillRect(10,10,700,650)
@@ -214,23 +240,23 @@ class UI {
 
         //DRAW PC
         this.pcToBuild.forEach((component) => {
-            this.ctx.drawImage(component.states.default.image, component.box.x, component.box.y, component.box.w, component.box.h)
+            this.ctx.drawImage(component.states.attached.image, component.box.x, component.box.y, component.box.w, component.box.h)
 
-            //DRAW SLOTS
-            // component.slots.forEach((slot) => {
-            //     this.ctx.fillStyle = 'rgb(0,200,0,0.2)'
-            //     this.ctx.fillRect(slot.x, slot.y, slot.w, slot.h)
-            // })
+            if (this.drawHighlights){
+                // DRAW SLOTS
+                component.slots.forEach((slot) => {
+                    this.ctx.fillStyle = 'rgb(0,200,0,0.2)'
+                    this.ctx.fillRect(slot.x, slot.y, slot.w, slot.h)
+                })
+            }
         })
 
-        //DRAW COMPONENTS
-        this.componentsToAdd.forEach((image, index) => {
-            const x = this.componentsToAdd[index].box.x
-            const y = this.componentsToAdd[index].box.y
-            const width = this.componentsToAdd[index].box.w
-            const height = this.componentsToAdd[index].box.h
+        //DRAW COMPONENTS  
+        this.componentsToAdd.forEach((component) => {
+            
 
-            this.ctx.drawImage(image.states.default.image, x, y, width, height)
+            this.ctx.drawImage(component.states.default.image, 
+                component.box.x, component.box.y, component.box.w, component.box.h)
         })
         
         requestAnimationFrame(() => this.animate())
