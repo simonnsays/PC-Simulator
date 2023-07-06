@@ -240,7 +240,7 @@ class UI {
 
         //DRAW PC
         this.pcToBuild.forEach((component) => {
-            this.ctx.drawImage(component.states.attached.image, component.box.x, component.box.y, component.box.w, component.box.h)
+            this.ctx.drawImage(component.states.attached.image, component.box.x, component.box.y, component.box.w, component.box.h) 
 
             if (this.drawHighlights){
                 // DRAW SLOTS

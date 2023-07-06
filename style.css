@@ -29,15 +29,6 @@ a {
   align-items: center;
 }
   
-@keyframes fadeInAnimation {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-      }
-}
-
 #title {
   text-align: center;
 }
@@ -63,6 +54,19 @@ a {
 .column{
   flex-direction: column;
 }
+
+/**************** SEARCH BAR ******************/
+.search-bar {
+  padding: 8px;
+  background-color:#dce9e6;
+  width: 50%;
+  border: 1px solid #dce9e6;
+  border-radius: 4px ;
+  font-size: 16px;
+  border-radius: 49px;
+}
+/**********************************************/
+
 /**************** BUTTONS**********************/
 .button {
   background-color:#dce9e6;
@@ -95,7 +99,11 @@ a {
   opacity: 60%;
 }
 
-.modal-container{
+.modal-container {
+  display: flex;
+}
+
+.items-container{
   display: flex;
   overflow: auto;
 }
@@ -128,11 +136,16 @@ a {
 }
 /**************************/
 
-#down {
-  margin-top: 100%;
-  padding-bottom: 25%;
-  } 
-
 #canvas-container {
   overflow: auto;
+}
+
+/************** ANIMATIONS *****************/
+@keyframes fadeInAnimation {
+  0% {
+      opacity: 0;
+  }
+  100% {
+      opacity: 1;
+    }
 }

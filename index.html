@@ -20,18 +20,23 @@
         <!-- SHOP -->
         <button id="openShop" class="button gameBtn">SHOP</button>
         <dialog id="shop" class="modal"> 
-          <div class="search-bar"> 
-            <!---- SEARCH BAR ---->
-          </div>
-          <div class="modal-container">  
-            <div class="side">
-              <h3>SHOP</h3>
-              <button id="closeShop" class="button gameBtn">CLOSE</button>
+            <!-- SIDE CATALOG -->
+            <div class="items-container">  
+              <div class="side">
+                <h3>SHOP</h3>
+                <button id="closeShop" class="button gameBtn">CLOSE</button>
+              </div>
+
+              <div class="items-container column center">
+                <!-- SEARCH BAR -->
+                <input class="search-bar" placeholder="Search.." autocomplete="off">
+
+                <!-- SHOP CONTENTS -->
+                <div id="shopContents" class="contents">
+
+                </div>
+              </div>
             </div>
-            <div id="shopContents" class="contents">
-              <!-- SHOP CONTENTS -->
-            </div>
-          </div>
         </dialog>
 
         <!-- INVENTORY -->
@@ -40,7 +45,7 @@
           <div class="search-bar"> 
             <!---- SEARCH BAR ---->
           </div>
-          <div class="modal-container">  
+          <div class="items-container">  
             <div class="side">
               <h3>INVENTORY</h3>
               <button id="closeInv" class="button gameBtn">CLOSE</button>
