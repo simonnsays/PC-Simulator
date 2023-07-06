@@ -20,38 +20,59 @@
         <!-- SHOP -->
         <button id="openShop" class="button gameBtn">SHOP</button>
         <dialog id="shop" class="modal"> 
-            <!-- SIDE CATALOG -->
-            <div class="items-container">  
-              <div class="side">
-                <h3>SHOP</h3>
-                <button id="closeShop" class="button gameBtn">CLOSE</button>
-              </div>
+          <!-- SIDE CATALOG -->
+          <div class="items-container">  
+            <div class="side">
+              <h3>SHOP</h3>
+              <button id="closeShop" class="button gameBtn">CLOSE</button>
+              <button id="closeShop" class="button catalogBtn">Graphics Card</button>
+              <button id="closeShop" class="button catalogBtn">CPU / Processor</button>
+              <button id="closeShop" class="button catalogBtn">Motherboard</button>
+              <button id="closeShop" class="button catalogBtn">RAM / Memory</button>
+              <button id="closeShop" class="button catalogBtn">ROM / Storage</button>
+              <button id="closeShop" class="button catalogBtn">Power Supply</button>
+              <button id="closeShop" class="button catalogBtn">Case</button>
+              <button id="closeShop" class="button catalogBtn">Cooling</button>
+              <button id="closeShop" class="button catalogBtn">Misc</button>
+            </div>
+            <div class="items-container column center">
+              <!-- SEARCH BAR -->
+              <input id="shop-search" class="search-bar" placeholder="Search.." autocomplete="off">
 
-              <div class="items-container column center">
-                <!-- SEARCH BAR -->
-                <input class="search-bar" placeholder="Search.." autocomplete="off">
+              <!-- SHOP CONTENTS -->
+              <div id="shopContents" class="contents">
 
-                <!-- SHOP CONTENTS -->
-                <div id="shopContents" class="contents">
-
-                </div>
               </div>
             </div>
+          </div>
         </dialog>
 
         <!-- INVENTORY -->
         <button id="openInv" class="button gameBtn">INVENTORY</button>
         <dialog id="inv" class="modal"> 
-          <div class="search-bar"> 
-            <!---- SEARCH BAR ---->
-          </div>
           <div class="items-container">  
             <div class="side">
               <h3>INVENTORY</h3>
               <button id="closeInv" class="button gameBtn">CLOSE</button>
+              <button id="closeShop" class="button catalogBtn">Graphics Card</button>
+              <button id="closeShop" class="button catalogBtn">CPU / Processor</button>
+              <button id="closeShop" class="button catalogBtn">Motherboard</button>
+              <button id="closeShop" class="button catalogBtn">RAM / Memory</button>
+              <button id="closeShop" class="button catalogBtn">ROM / Storage</button>
+              <button id="closeShop" class="button catalogBtn">Power Supply</button>
+              <button id="closeShop" class="button catalogBtn">Case</button>
+              <button id="closeShop" class="button catalogBtn">Cooling</button>
+              <button id="closeShop" class="button catalogBtn">Misc</button>
             </div>
-            <div id="invContents" class="contents">
+
+            <div class="items-container column center">
+              <!-- SEARCH BAR -->
+              <input id="shop-search" class="search-bar" placeholder="Search.." autocomplete="off">
+
               <!-- INV CONTENTS -->
+              <div id="invContents" class="contents">
+
+              </div>
             </div>
           </div> 
         </dialog>

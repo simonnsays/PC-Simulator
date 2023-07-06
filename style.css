@@ -22,12 +22,6 @@ a {
   align-items: center;
   justify-content: center;
 }
-
-.center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
   
 #title {
   text-align: center;
@@ -51,12 +45,24 @@ a {
   text-align: center;
 }
 
+/***************** UTILITY *******************/
 .column{
   flex-direction: column;
 }
 
+.center {
+  /* justify-content: center; */
+  align-items: center;
+}
+
+.flex {
+  display: flex;
+}
+/**********************************************/
+
 /**************** SEARCH BAR ******************/
 .search-bar {
+  margin-bottom: 5px;
   padding: 8px;
   background-color:#dce9e6;
   width: 50%;
@@ -69,6 +75,7 @@ a {
 
 /**************** BUTTONS**********************/
 .button {
+  height: auto;
   background-color:#dce9e6;
   font-weight: bold;
   font-size: 30px;
@@ -84,8 +91,18 @@ a {
 .gameBtn {
   font-size: 20px;
 }
+
+.catalogBtn {
+  margin: 5px;
+  width: 130px;
+  height: 70px;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 5px;
+}
 /**********************************************/
-/*************************** MODALS ***********************/
+
+/******************** MODALS ******************/
 .modal {
   /* max-width: 800px;
   max-height: 500px; */
@@ -99,19 +116,9 @@ a {
   opacity: 60%;
 }
 
-.modal-container {
-  display: flex;
-}
-
 .items-container{
   display: flex;
   overflow: auto;
-}
-
-.box {
-  height: 150px;
-  width: 150px;
-  border: solid 1px black;
 }
 
 .content{
@@ -134,7 +141,7 @@ a {
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 0px;
 }
-/**************************/
+/*******************************************/
 
 #canvas-container {
   overflow: auto;
