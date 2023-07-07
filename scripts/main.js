@@ -25,23 +25,25 @@ function fillShop(items) {
 /////////////// TRANSFER TO INV
 function transferToInv(name) {
     const contents = document.querySelector('#invContents')
-    const content = document.createElement('a')
-    content.className = 'content'
-    content.id = name
-    content.href = `javascript:transferToCanvas("${content.id}")`
 
-    for (let component in components) {
-        if(components[component].name === content.id) {
-            const image = document.createElement('img')
-            image.src = components[component].states.default.imageSrc
-            image.style.width = '150px'
-            image.style.height = '150px'
-            image.style.padding = '10px'
 
-            content.appendChild(image)
-        }
-    }
-    contents.appendChild(content)
+    // const content = document.createElement('a')
+    // content.className = 'content'
+    // content.id = name
+    // content.href = `javascript:transferToCanvas("${content.id}")`
+
+    // for (let component in components) {
+    //     if(components[component].name === content.id) {
+    //         const image = document.createElement('img')
+    //         image.src = components[component].states.default.imageSrc
+    //         image.style.width = '150px'
+    //         image.style.height = '150px'
+    //         image.style.padding = '10px'
+
+    //         content.appendChild(image)
+    //     }
+    // }
+    // contents.appendChild(content)
 }
 
 /////////////// TRANSFER TO UI

@@ -44,27 +44,6 @@ function kmpSearch(string, pattern) {
     return results
 }
 
-// Update Divs
-function updateDivs(pattern, container, items) {
-    //remove all divs
-    while (container.firstChild) {
-        container.removeChild(container.firstChild)
-    }
-
-    //search for match
-    const results = components.filter(component => kmpSearch(component.name.toLowerCase(), pattern).length > 0)
-
-    //only create divs for matches
-    results.forEach(result => {
-        const content = makeElement(result)
-
-        //transfer to inv onclick
-        content.onclick = transferToInv(result)
-
-        shopContainer.appendChild(content)
-    })
-}
-
 // Create Element
 function makeElement(item) {
     //creaate div
