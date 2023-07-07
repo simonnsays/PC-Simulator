@@ -7,12 +7,15 @@ function makeElement(item) {
 
     //attach image to div
     const image =  item.states.default.image
+    image.style.width = '100%'
+    image.style.height = '100%'
+    image.alt = item.name
     element.appendChild(image)
 
     // make slider div
     slider = createSlider(element)
     element.appendChild(slider)
-    
+
     return element
 }
 
