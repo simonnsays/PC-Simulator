@@ -6,7 +6,12 @@ game.start()
 function fillShop(items) {
     const contents = document.querySelector('#shopContents')
     
+    while (contents.firstChild) {
+        contents.removeChild(contents.firstChild)
+    }
+
     items.forEach(item => {
+        
         //create divs for each item
         const content = makeElement(item)
 
