@@ -70,6 +70,7 @@ a {
   border-radius: 4px ;
   font-size: 16px;
   border-radius: 49px;
+  align-self: center;
 }
 /**********************************************/
 
@@ -90,12 +91,13 @@ a {
 
 .gameBtn {
   font-size: 20px;
+  border: 3px solid #0f172a;
 }
 
 .catalogBtn {
   margin: 5px;
-  width: 130px;
-  height: 70px;
+  width: 120px;
+  height: 50px;
   font-size: 1rem;
   font-weight: 600;
   padding: 5px;
@@ -104,8 +106,7 @@ a {
 
 /******************** MODALS ******************/
 .modal {
-  /* max-width: 800px;
-  max-height: 500px; */
+
   animation: fadeInAnimation ease .3s;
   animation-iteration-count: 1  ;
   animation-fill-mode: forwards;
@@ -122,15 +123,38 @@ a {
 }
 
 .content{
-  margin:10px;
+  width: 150px;
+  height: 150px;
+  margin:5px;
   border: solid 1px black;
+  padding: 10px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
   transition: transform 0.2s ease-in-out;
 }
 .content:hover {
   transform: scale(1.05);
 }
 
+.slider {
+  width: 100%;
+  height: 20%;
+  position: absolute;
+  top: 100%;
+  background-color: #dce9e6;
+  white-space: normal;
+  text-align: center;
+  transition: transform 0.3s ease-in-out
+}
+
+.content:hover .slider {
+  transform: translateY(-100%);
+}
+
 .side {
+  max-width: fit-content;
   display: flex;
   flex-direction: column;
   align-items: center;

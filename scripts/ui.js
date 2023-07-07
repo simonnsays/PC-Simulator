@@ -55,7 +55,6 @@ class UI {
         //get mouse position and boundingBox of the component
         const mousePosition = this.getMousePosition(e)
         this.selectedComponent = this.getPiece(mousePosition)
-        console.log(this.selectedComponent)
 
         if (this.selectedComponent != undefined){
             //declare origin for reference
@@ -90,9 +89,7 @@ class UI {
                     this.drawHighlights = true
                 }
             })
-        }
-
-        
+        } 
     }
 
     //MOUSE UP EVENT

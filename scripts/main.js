@@ -1,23 +1,20 @@
 const game = new UI
+fillShop(components)
+game.start()
 
 ///////////// FILL SHOP Function
 function fillShop(items) {
     const contents = document.querySelector('#shopContents')
     
-    for (let item in items) {
-        const content = document.createElement('a')
-        content.className = 'content'
-        content.id = items[item].name
-        content.href = `javascript:transferToInv("${content.id}")`
+    items.forEach(item => {
+        //create divs for each item
+        const content = makeElement(item)
 
-        const image = document.createElement('img')
-        image.src = items[item].states.default.imageSrc
-        image.style.width = '150px'
-        image.style.height = '150px'
-        image.style.padding = '10px'
-        content.appendChild(image)
+        //transfer to inv onclick
+        content.onclick = transferToInv(item)
+
         contents.appendChild(content)
-    }
+    })
 }
 
 /////////////// TRANSFER TO INV
@@ -56,5 +53,3 @@ function transferToCanvas(name) {
     }
 }
 
-game.start()
-fillShop(components)
