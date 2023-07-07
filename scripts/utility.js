@@ -52,14 +52,15 @@ function makeElement(item) {
     element.id = item.name
 
     //attach image to div
-    const image =  item.states.default.image
+    const image =  document.createElement('img')
+    image.src = item.states.default.imageSrc
     image.style.width = '100%'
     image.style.height = '100%'
     image.alt = item.name
     element.appendChild(image)
 
     // make slider div
-    slider = createSlider(element)
+    slider = createSlider(item)
     element.appendChild(slider)
 
     return element
@@ -69,7 +70,7 @@ function makeElement(item) {
 function createSlider(item) {
     const slider = document.createElement('div')
     slider.className = 'slider'
-    slider.textContent = item.id
+    slider.textContent = item.name + ' (' + item.type + ')'
 
     return slider
 }

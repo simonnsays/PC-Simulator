@@ -1,4 +1,6 @@
 const game = new UI
+
+const inventory = []
 fillShop(components)
 game.start()
 
@@ -10,21 +12,53 @@ function fillShop(items) {
         contents.removeChild(contents.firstChild)
     }
 
-    items.forEach(item => {
-        
+    items.forEach(item => { 
         //create divs for each item
         const content = makeElement(item)
 
         //transfer to inv onclick
-        content.onclick = transferToInv(item)
+        content.onclick = () => transferToInv(item)
 
         contents.appendChild(content)
     })
 }
 
+
 /////////////// TRANSFER TO INV
-function transferToInv(name) {
+function transferToInv(item) {
     const contents = document.querySelector('#invContents')
+    const uniqueItems = []
+
+    inventory.push(item)
+    console.log(inventory)
+
+    //find unique items
+    inventory.forEach(item => {
+        if (!uniqueItems.includes(item)) {
+            uniqueItems.push(item)
+        }
+    })
+    
+    while (contents.firstChild) {
+        contents.removeChild(contents.firstChild)
+    }
+    //make divs for element
+    uniqueItems.forEach(item => {
+        invCount = 0
+        for (let i = 0; i < inventory.length; i++) {
+            if (item == inventory[i]) {
+                invCount++
+            }
+        }
+
+        const content = makeElement(item)
+        const countDiv = document.createElement('div')
+        countDiv.className = 'item-count'
+        countDiv.innerHTML = invCount
+
+        content.appendChild(countDiv)
+        contents.appendChild(content)
+    })
 
 
     // const content = document.createElement('a')

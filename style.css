@@ -138,6 +138,19 @@ a {
   transform: scale(1.05);
 }
 
+.item-count {
+  width: 20%;
+  height: 20%;            
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #dce9e6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* opacity: 70%; */
+}
+
 .slider {
   width: 100%;
   height: 20%;
@@ -148,7 +161,6 @@ a {
   text-align: center;
   transition: transform 0.3s ease-in-out
 }
-
 .content:hover .slider {
   transform: translateY(-100%);
 }
