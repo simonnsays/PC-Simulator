@@ -74,3 +74,12 @@ function createSlider(item) {
 
     return slider
 }
+
+// Find Unique Items
+function findUnique(items) {
+    const uniqueItems = []
+    items.forEach(item => {
+        if(!uniqueItems.includes(item)) uniqueItems.push(item)
+    })
+    return uniqueItems
+}
