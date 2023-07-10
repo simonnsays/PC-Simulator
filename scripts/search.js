@@ -10,7 +10,7 @@ shopSearch.addEventListener('input', (e) => {
     const pattern = e.target.value
 
     //update divs according to search
-    pattern.length == 0 ? fillShop(components) : updateDivs(pattern, shopContainer, components, fillInv)
+    pattern.length == 0 ? fillShop(shop) : updateDivs(pattern, shopContainer, shop, fillInv)
 })
 
 /// INVENTORY SEARCH BAR

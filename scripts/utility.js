@@ -44,6 +44,116 @@ function kmpSearch(string, pattern) {
     return results
 }
 
+///////////// FILL SHOP Function
+function fillShop(items) {
+    const contents = document.querySelector('#shopContents')
+    
+    while (contents.firstChild) {
+        contents.removeChild(contents.firstChild)
+    }
+
+    items.forEach(item => { 
+        //create divs for each item
+        const content = makeElement(item)
+
+        //transfer to inv onclick
+        content.onclick = () => {
+            inventory.push(item)
+            fillInv()
+        }
+
+        contents.appendChild(content)
+    })
+}
+
+/////////////// TRANSFER TO INV
+function fillInv() {
+    const contents = document.querySelector('#invContents')
+    
+
+    //find unique items
+    const uniqueItems = findUnique(inventory)
+    while (contents.firstChild) {
+        contents.removeChild(contents.firstChild)
+    }
+    //make divs for element
+    uniqueItems.forEach(item => {
+        invCount = 0
+        for (let i = 0; i < inventory.length; i++) {
+            if (item == inventory[i]) {
+                invCount++
+            }
+        }
+
+        const content = makeElement(item)
+        if (invCount > 1 ) {
+            const countDiv = document.createElement('div')
+            countDiv.className = 'item-count'
+            countDiv.innerHTML = invCount
+
+            content.appendChild(countDiv)
+        }
+        content.onclick = () => fillCanvas(item)
+
+        contents.appendChild(content)
+    })
+}
+
+/////////////// TRANSFER TO UI
+function fillCanvas(item) {
+
+    for (let i = 0; i < inventory.length; i++) {
+        if (item === inventory[i]){
+            inventory.splice(i, 1)
+            fillInv()
+
+            if(item.type === 'pcCase') {
+                game.addToPcCaseArea(item)
+            } else {
+                game.addToCmponentArea(item)
+            }
+            return
+        }
+    }
+}
+
+// Update Divs
+function updateDivs(pattern, container, items, func) {
+    //remove all divs
+    while (container.firstChild) {
+        container.removeChild(container.firstChild)
+    }
+    
+    //search for match
+    const results = items.filter(item => kmpSearch(item.name.toLowerCase(), pattern.toLowerCase()).length > 0)
+
+    //only create divs for matches
+    const uniqueItems = findUnique(results)
+    
+    uniqueItems.forEach(result => {
+        invCount = 0
+        for (let i = 0; i < inventory.length; i++) {
+            if (result == results[i]) {
+                invCount++
+            }
+        }
+
+        const content = makeElement(result)
+        if (invCount > 1 ) {
+            const countDiv = document.createElement('div')
+            countDiv.className = 'item-count'
+            countDiv.innerHTML = invCount
+
+            content.appendChild(countDiv)
+        }
+        
+        //operate funtion onclick
+        content.onclick = () => func(result)
+
+        container.appendChild(content)
+    })
+}
+
 // Create Element
 function makeElement(item) {
     //creaate div
@@ -82,41 +192,4 @@ function findUnique(items) {
         if(!uniqueItems.includes(item)) uniqueItems.push(item)
     })
     return uniqueItems
-}
-
-// Update Divs
-function updateDivs(pattern, container, items, func) {
-    //remove all divs
-    while (container.firstChild) {
-        container.removeChild(container.firstChild)
-    }
-    
-    //search for match
-    const results = items.filter(item => kmpSearch(item.name.toLowerCase(), pattern.toLowerCase()).length > 0)
-
-    //only create divs for matches
-    const uniqueItems = findUnique(results)
-    
-    uniqueItems.forEach(result => {
-        invCount = 0
-        for (let i = 0; i < inventory.length; i++) {
-            if (result == results[i]) {
-                invCount++
-            }
-        }
-
-        const content = makeElement(result)
-        if (invCount > 1 ) {
-            const countDiv = document.createElement('div')
-            countDiv.className = 'item-count'
-            countDiv.innerHTML = invCount
-
-            content.appendChild(countDiv)
-        }
-        console.log(result) 
-        //operate funtion onclick
-        content.onclick = () => func(result)
-
-        container.appendChild(content)
-    })
 }

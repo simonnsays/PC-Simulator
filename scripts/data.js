@@ -1,5 +1,4 @@
-let inventory = []
-let shop = [
+let data = [
     new Component({
         type: 'pcCase',
         name: 'Nanoxia Deep Silence 3',
