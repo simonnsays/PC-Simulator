@@ -250,8 +250,6 @@ class UI {
 
         //DRAW COMPONENTS  
         this.componentsToAdd.forEach((component) => {
-            
-
             this.ctx.drawImage(component.states.default.image, 
                 component.box.x, component.box.y, component.box.w, component.box.h)
         })

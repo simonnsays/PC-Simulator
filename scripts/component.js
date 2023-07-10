@@ -8,8 +8,9 @@ class Component {
         this.isAttached = isAttached
 
         for (let state in this.states) {
-            states[state].image = new Image()
-            states[state].image.src = states[state].imageSrc
+            this.states[state].image = new Image()
+            this.states[state].image.src = this.states[state].imageSrc
         }
+        
     }
 }
