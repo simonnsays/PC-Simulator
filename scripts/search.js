@@ -11,7 +11,6 @@ shopSearch.addEventListener('input', (e) => {
 
     //search for match
     const results = shop.filter(item => kmpSearch(item.name.toLowerCase(), pattern.toLowerCase()).length > 0)
-    console.log(results)
     
     //update divs according to search
     if (pattern.length == 0) {

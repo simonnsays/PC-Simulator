@@ -68,9 +68,7 @@ function fillShop(items) {
 /////////////// TRANSFER TO INV
 function fillInv(component) {
     const contents = document.querySelector('#invContents')
-    
     inventory.push(component)
-    console.log(inventory)
 
     //find unique items
     const uniqueItems = findUnique(inventory)
@@ -102,7 +100,6 @@ function fillInv(component) {
 
 /////////////// TRANSFER TO UI
 function fillCanvas(item) {
-    console.log(item)
     for (let i = 0; i < inventory.length; i++) {
         if (item === inventory[i]){
             inventory.splice(i, 1)

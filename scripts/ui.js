@@ -181,7 +181,12 @@ class UI {
     }
     
     addToCmponentArea(src) {
-        if (this.componentsToAdd.length >= 3) this.componentsToAdd.pop()
+        if (this.componentsToAdd.length >= 3) {
+            const returnItem = this.componentsToAdd.splice(2,1)
+            shop.forEach(item => {
+                if (item.name === returnItem[0].name) fillInv(item)
+            })
+        }
         let component = Object.assign({}, src)
         this.componentsToAdd.unshift(component)
         this.createBoundingBox(this.componentsToAdd)
@@ -249,7 +254,7 @@ class UI {
         })
 
         //DRAW COMPONENTS  
-        this.componentsToAdd.forEach((component) => {
+        this.componentsToAdd.forEach((component) => { 
             this.ctx.drawImage(component.states.default.image, 
                 component.box.x, component.box.y, component.box.w, component.box.h)
         })
