@@ -58,8 +58,7 @@ function fillShop(items) {
 
         //transfer to inv onclick
         content.onclick = () => {
-            inventory.push(item)
-            fillInv()
+            fillInv(item)
         }
 
         contents.appendChild(content)
@@ -67,9 +66,11 @@ function fillShop(items) {
 }
 
 /////////////// TRANSFER TO INV
-function fillInv() {
+function fillInv(component) {
     const contents = document.querySelector('#invContents')
     
+    inventory.push(component)
+    console.log(inventory)
 
     //find unique items
     const uniqueItems = findUnique(inventory)
@@ -101,11 +102,13 @@ function fillInv() {
 
 /////////////// TRANSFER TO UI
 function fillCanvas(item) {
-
+    console.log(item)
     for (let i = 0; i < inventory.length; i++) {
         if (item === inventory[i]){
             inventory.splice(i, 1)
-            fillInv()
+
+            const invContainer = document.querySelector('#invContents')
+            updateDivs(invContainer, inventory, fillCanvas)
 
             if(item.type === 'pcCase') {
                 game.addToPcCaseArea(item)
@@ -118,22 +121,19 @@ function fillCanvas(item) {
 }
 
 // Update Divs
-function updateDivs(pattern, container, items, func) {
+function updateDivs(container, items, func) {
     //remove all divs
     while (container.firstChild) {
         container.removeChild(container.firstChild)
     }
     
-    //search for match
-    const results = items.filter(item => kmpSearch(item.name.toLowerCase(), pattern.toLowerCase()).length > 0)
-
     //only create divs for matches
-    const uniqueItems = findUnique(results)
+    const uniqueItems = findUnique(items)
     
     uniqueItems.forEach(result => {
         invCount = 0
-        for (let i = 0; i < inventory.length; i++) {
-            if (result == results[i]) {
+        for (let i = 0; i < items.length; i++) {
+            if (result == items[i]) {
                 invCount++
             }
         }
