@@ -225,6 +225,18 @@ class UI {
         this.pcToBuild.push(pcToBuild)
     }
 
+    replacePC(src) {
+        while(this.pcToBuild.length >= 1) {
+            const component = this.pcToBuild.pop()
+            shop.forEach(item => {
+                if (component.name === item.name) fillInv(item)
+            })
+        }
+
+        this.addToPcCaseArea(src)
+        console.log(this.pcToBuild[0])
+    }
+
     animate() {
         this.ctx.clearRect(0,0,this.canvas.width,this.canvas.height)
         this.ctx.fillStyle = 'teal'

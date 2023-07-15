@@ -98,23 +98,53 @@ function fillInv(component) {
     })
 }
 
-/////////////// TRANSFER TO UI
+/////////////// TRANSFER TO Canvas
 function fillCanvas(item) {
     for (let i = 0; i < inventory.length; i++) {
         if (item === inventory[i]){
-            inventory.splice(i, 1)
+            removedItem = inventory.splice(i, 1)
 
-            const invContainer = document.querySelector('#invContents')
-            updateDivs(invContainer, inventory, fillCanvas)
-
+            // separate pcCase inventory
             if(item.type === 'pcCase') {
-                game.addToPcCaseArea(item)
+                if(game.pcToBuild.length < 1) {
+                    game.addToPcCaseArea(item)
+                    return
+                } 
+
+                // Create warning when replacing Case
+                message = showPopUp('01')
+            
+                const proceed = createBtn()
+                proceed.innerHTML = 'Proceed'
+                proceed.onclick = () => {
+                    game.replacePC(item)
+                    message.close()}
+                message.appendChild(proceed)
+    
+                const cancel = createBtn()
+                cancel.innerHTML = 'Cancel'
+                cancel.onclick = () => {
+                    popUp.close()
+                    fillInv(removedItem[0])
+                }
+                message.appendChild(cancel)
+                message.showModal()
+   
             } else {
                 game.addToCmponentArea(item)
             }
+            const invContainer = document.querySelector('#invContents')
+            updateDivs(invContainer, inventory, fillCanvas)
             return
         }
     }
+}
+
+// Create Button
+function createBtn() {
+    btn = document.createElement('button')
+    btn.className = 'button small'
+    return btn
 }
 
 // Update Divs
