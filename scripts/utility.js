@@ -103,7 +103,8 @@ function fillCanvas(item) {
     for (let i = 0; i < inventory.length; i++) {
         if (item === inventory[i]){
             removedItem = inventory.splice(i, 1)
-
+            const invContainer = document.querySelector('#invContents')
+            updateDivs(invContainer, inventory, fillCanvas)
             // separate pcCase inventory
             if(item.type === 'pcCase') {
                 if(game.pcToBuild.length < 1) {
@@ -133,7 +134,7 @@ function fillCanvas(item) {
             } else {
                 game.addToCmponentArea(item)
             }
-            const invContainer = document.querySelector('#invContents')
+            // const invContainer = document.querySelector('#invContents')
             updateDivs(invContainer, inventory, fillCanvas)
             return
         }

@@ -6,3 +6,4 @@ data.forEach(data => shop.push(data))
 fillShop(shop)
 
 game.start()
+console.log(shop)

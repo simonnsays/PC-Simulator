@@ -200,29 +200,39 @@ class UI {
               w: 190,
               h: 190
             }
-        })    
+            this.createSlotBoundingBox(component)
+        })   
+        
     }
 
     createSlotBoundingBox(component) {
-        component.slots.forEach((slot) => {
-            slot.x += component.box.x,
-            slot.y += component.box.y
+        component.slots = []
+        component.slotsOffset.forEach((offset, index) => {
+            component.slots[index] = {
+                name: offset.name,
+                x: offset.x + component.box.x,
+                y: offset.y + component.box.y,
+                w: offset.w,
+                h: offset.h
+            }
+            
         })
+        console.log(component)
     }
 
     addToPcCaseArea(src) {
-        const pcToBuild = Object.assign({}, src)
+        const caseToBuild = {...src}//Object.assign({}, src)
 
         //create Bounding Box
-        pcToBuild.box = {
+        caseToBuild.box = {
             x: this.pcCaseArea.x + 100,
             y: this.pcCaseArea.y + 100,
             w: this.pcCaseArea.w -200,
             h: this.pcCaseArea.h -208
         }
         //create Slot Boxes
-        this.createSlotBoundingBox(pcToBuild)
-        this.pcToBuild.push(pcToBuild)
+        this.createSlotBoundingBox(caseToBuild)
+        this.pcToBuild.push(caseToBuild)
     }
 
     replacePC(src) {

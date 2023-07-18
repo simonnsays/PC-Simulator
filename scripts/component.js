@@ -1,10 +1,10 @@
 class Component {
-    constructor ({type, name, states, size, slots, isAttached = 'false'}) {
+    constructor ({type, name, states, size, slotsOffset, isAttached = 'false'}) {
         this.type = type
         this.name = name
         this.size = size
         this.states = states
-        this.slots = slots
+        this.slotsOffset = slotsOffset
         this.isAttached = isAttached
 
         for (let state in this.states) {
